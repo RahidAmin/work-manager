@@ -1,6 +1,8 @@
 import { connectDB } from "@/lib/db";
 import { User } from "@/models/user";
 import { NextResponse } from "next/server"
+import bycrypt from "bcryptjs";
+
 
 connectDB();
 
@@ -57,6 +59,7 @@ export async function POST(request) {
     })
 
     try {
+        user.password = await bycrypt.hash(user.password, parseInt(process.env.BCRYPT_SALT));
 
         const createdUser = await user.save();
 
