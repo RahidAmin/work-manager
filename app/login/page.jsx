@@ -1,10 +1,31 @@
 'use client'
+import { useRouter } from 'next/navigation';
 import React from 'react'
+import { toast } from 'react-toastify';
 
 const Login = () => {
 
+    const router = useRouter()
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        const data = { email, password };
+        fetch('http://localhost:3000/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+
+        }).then(res => res.json()).then(result => {
+            if (result.success) {
+                toast.success("logged In")
+                router.push('/profile/user')
+            }
+
+        })
     }
 
     return (
@@ -19,7 +40,7 @@ const Login = () => {
                         <label className="block text-xs font-medium text-gray-600 mb-1">Email</label>
                         <input
                             type="email"
-                            autoComplete="off"
+                            autoComplete="new-password"
                             className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
                             placeholder=""
                             name='email'
@@ -31,7 +52,7 @@ const Login = () => {
                         <label className="block text-xs font-medium text-gray-600 mb-1">Password</label>
                         <input
                             type="password"
-                            autoComplete="off"
+                            autoComplete="new-password"
                             className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
                             placeholder=""
 
