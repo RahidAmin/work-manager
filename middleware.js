@@ -7,7 +7,7 @@ export function middleware(request) {
 
     const authToken = request.cookies.get('authToken')?.value;
     if (request.nextUrl.pathname === "/api/login") {
-        return
+        return NextResponse.next();
     }
 
     const loggedInUserNotAccessPaths = request.nextUrl.pathname === "/login" || request.nextUrl.pathname === '/signUp';
@@ -24,9 +24,10 @@ export function middleware(request) {
 
     }
 
+    return NextResponse.next();
 
 
-    console.log('auth token: ', authToken);
+
 }
 
 export const config = {

@@ -4,6 +4,8 @@ import CustomNavbar from "./components/CustomNavbar";
 import Footer from "./components/Footer";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import UserProvider from "@/Context/userProvider";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -25,13 +27,14 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <CustomNavbar></CustomNavbar>
-        <div className="min-h-screen">
-          {children}
-        </div>
-        <ToastContainer position="top-right" />
-        <Footer></Footer>
-
+        <UserProvider>
+          <CustomNavbar></CustomNavbar>
+          <div className="min-h-screen">
+            {children}
+          </div>
+          <ToastContainer position="top-right" />
+          <Footer></Footer>
+        </UserProvider>
       </body>
     </html>
   );

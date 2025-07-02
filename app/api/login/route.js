@@ -42,11 +42,12 @@ export async function POST(request) {
 
         const response = NextResponse.json({
             message: "Login Success....",
-            success: true
+            success: true,
+            user: user,
         })
 
         response.cookies.set("authToken", token, {
-            expiresIn: "1d",
+            expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
             httpOnly: true,
         })
 
