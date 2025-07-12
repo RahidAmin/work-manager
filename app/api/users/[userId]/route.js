@@ -1,8 +1,10 @@
+import { connectDB } from "@/lib/db";
 import { User } from "@/models/user";
 import { NextResponse } from "next/server";
 
 //get single user
 export async function GET(response, { params }) {
+    await connectDB();
 
     const { userId } = params;
     const user = await User.findById(userId);
@@ -58,7 +60,7 @@ export async function PUT(request, { params }) {
         user.password = password;
         user.about = about;
         user.imageUrl = imageUrl;
-
+        await connectDB();
         const updatedUser = await user.save();
         return NextResponse.json(updatedUser)
 

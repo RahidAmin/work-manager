@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 import jwt from "jsonwebtoken";
 
-connectDB();
+
 
 
 
@@ -14,7 +14,7 @@ connectDB();
 export async function GET(request) {
 
     try {
-
+        await connectDB();
         const tasks = await Task.find();
         return NextResponse.json(tasks);
     } catch (error) {

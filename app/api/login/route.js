@@ -6,7 +6,7 @@ import bcrypt from 'bcryptjs'
 
 import jwt from 'jsonwebtoken';
 
-await connectDB();
+
 export async function POST(request) {
 
 
@@ -15,6 +15,7 @@ export async function POST(request) {
 
 
     try {
+        await connectDB();
         //1.get user
         const user = await User.findOne({
             email: email
