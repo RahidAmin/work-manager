@@ -14,7 +14,7 @@ const UserProvider = ({ children }) => {
                 });
                 const currentUser = await res.json();
 
-                setUser({ ...currentUser });
+                setUser(currentUser);
             } catch (error) {
                 console.error(error)
             }

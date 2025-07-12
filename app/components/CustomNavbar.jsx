@@ -4,11 +4,16 @@ import React, { useContext, useState } from 'react';
 import Link from 'next/link';
 import { FaTasks, FaHome, FaPlus, FaList, FaSignInAlt, FaUserPlus } from 'react-icons/fa';
 import UserContext from '@/Context/userContext';
+import { useRouter } from 'next/navigation';
+
 
 const CustomNavbar = () => {
     const context = useContext(UserContext);
+
     console.log(context);
     const [isOpen, setIsOpen] = useState(false);
+
+    const router = useRouter();
 
     const DoLogout = async () => {
         try {
@@ -17,6 +22,7 @@ const CustomNavbar = () => {
             })
             console.log(data)
             context.setUser(undefined);
+            router.push('/')
 
             // if (data.ok) {
             //     window.location.href = '/login'
@@ -95,51 +101,7 @@ const CustomNavbar = () => {
                 </div>
             </div>
 
-            {/* Mobile Menu */}
-            {/* {isOpen && (
-                <div className="md:hidden px-4 pb-4 space-y-2">
-                    <Link
-                        onClick={() => setIsOpen(false)}
-                        href="/"
-                        className="flex items-center gap-2 py-2 px-3 rounded hover:bg-gray-800 hover:text-cyan-400 transition"
-                    >
-                        <FaHome />
-                        Home
-                    </Link>
-                    <Link
-                        onClick={() => setIsOpen(false)}
-                        href="/add-task"
-                        className="flex items-center gap-2 py-2 px-3 rounded hover:bg-gray-800 hover:text-cyan-400 transition"
-                    >
-                        <FaPlus />
-                        Add Task
-                    </Link>
-                    <Link
-                        onClick={() => setIsOpen(false)}
-                        href="/show-tasks"
-                        className="flex items-center gap-2 py-2 px-3 rounded hover:bg-gray-800 hover:text-cyan-400 transition"
-                    >
-                        <FaList />
-                        Show Tasks
-                    </Link>
-                    <Link
-                        onClick={() => setIsOpen(false)}
-                        href="/login"
-                        className="flex items-center gap-2 py-2 px-3 rounded hover:bg-gray-800 hover:text-cyan-400 transition"
-                    >
-                        <FaSignInAlt />
-                        Login
-                    </Link>
-                    <Link
-                        onClick={() => setIsOpen(false)}
-                        href="/signUp"
-                        className="flex items-center gap-2 py-2 px-3 rounded hover:bg-gray-800 hover:text-cyan-400 transition"
-                    >
-                        <FaUserPlus />
-                        Signup
-                    </Link>
-                </div>
-            )} */}
+
         </nav>
     );
 };

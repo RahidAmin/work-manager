@@ -17,7 +17,7 @@ const AddTask = () => {
         title: "",
         content: "",
         status: "",
-        userId: "681dfa4098165ec6f1cbce79"
+        userId: ""
     })
 
     const handleAddTask = async (e) => {
@@ -27,8 +27,8 @@ const AddTask = () => {
             setTask({
                 title: "",
                 content: "",
-                status: "pending",
-                userId: "681dfa4098165ec6f1cbce79",
+                status: "",
+                userId: "",
 
             })
         } catch (error) {

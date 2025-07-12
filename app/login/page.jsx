@@ -1,12 +1,13 @@
 'use client'
+import UserContext from '@/Context/userContext';
 import { useRouter } from 'next/navigation';
-import React from 'react'
+import React, { useContext } from 'react'
 import { toast } from 'react-toastify';
 
 const Login = () => {
 
     const router = useRouter()
-
+    const context = useContext(UserContext);
     const handleSubmit = async (e) => {
         e.preventDefault();
         const email = e.target.email.value;
@@ -22,6 +23,7 @@ const Login = () => {
         }).then(res => res.json()).then(result => {
             if (result.success) {
                 toast.success("logged In")
+                context.setUser(result.user)
                 router.push('/profile/user')
             }
 
